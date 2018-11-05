@@ -15,7 +15,10 @@ public class Player : MonoBehaviour
 	public Text TextRings;
 
 	public bool isGrounded;
-	
+    public GameObject lastCheckpoint;
+
+    public ParticleSystem particle;
+
 	void Start ()
 	{
 		TextLives.text = lives.ToString();
@@ -73,13 +76,24 @@ public class Player : MonoBehaviour
             rings++;
             TextRings.text = rings.ToString();
         }
+
+        if (collision2D.gameObject.CompareTag("checkpoint"))
+        {
+            lastCheckpoint = collision2D.gameObject;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision2D)
 	{
 		if ( collision2D.gameObject.CompareTag("Monstros"))
 		{
-			//Criar lógica para perder vida
+            lives--;
+            TextLives.text = lives.ToString();
+
+            if(lives == 0){
+
+                transform.position = lastCheckpoint.transform.position;
+            }
 		}
 		
 		if ( collision2D.gameObject.CompareTag("Plataformas"))
@@ -97,4 +111,14 @@ public class Player : MonoBehaviour
 			isGrounded = false;
 		}
 	}
+
+    void DustPlay(){
+        particle.Play();
+    }
+
+    void DustStop()
+    {
+        particle.Stop();
+    }
+
 }

@@ -77,6 +77,15 @@ public class Player : MonoBehaviour
             TextRings.text = rings.ToString();
         }
 
+
+        if (collision2D.gameObject.CompareTag("Vidas"))
+        {
+            Destroy(collision2D.gameObject);
+            lives++;
+            TextLives.text = lives.ToString();
+        }
+
+
         if (collision2D.gameObject.CompareTag("checkpoint"))
         {
             lastCheckpoint = collision2D.gameObject;

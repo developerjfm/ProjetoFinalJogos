@@ -8,6 +8,7 @@ TagManager:
   - Monstros
   - Moedas
   - checkpoint
+  - Vidas
   layers:
   - Default
   - TransparentFX
